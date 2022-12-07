@@ -300,7 +300,7 @@ if __name__ == "__main__":
 
     text2_1 = Text(root, relief=GROOVE, bg="#FFFFFF")
     text2_1.place(relwidth=0.375, relheight=0.275, relx=0.1, rely=0.365)
-    text2_1.insert("1.0", time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime()))
+    text2_1.insert("1.0", time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
 
     # 排除框部分
     lb2_2 = Label(root, text="排除框", anchor=NW)
