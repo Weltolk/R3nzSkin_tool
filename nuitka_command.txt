@@ -1,0 +1,1 @@
+python -m nuitka --onefile --follow-imports --windows-icon-from-ico=icon.png --mingw64 --windows-disable-console --windows-uac-admin --enable-plugin=tk-inter .\R3nzSkin_tool.py
