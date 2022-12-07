@@ -4,6 +4,14 @@ R3nzSkin tool
 
 R3nzSkin小工具
 
+---
+
+中文文档: [https://github.com/Weltolk/R3nzSkin_tool/blob/main/README.md](https://github.com/Weltolk/R3nzSkin_tool/blob/main/README.md)
+
+English Documents: [https://github.com/Weltolk/R3nzSkin_tool/blob/main/README_en.md](https://github.com/Weltolk/R3nzSkin_tool/blob/main/README_en.md)
+
+---
+
 # Installation or compilation method
 
 ## Installation method
@@ -12,7 +20,7 @@ Just download from [https://github.com/Weltolk/R3nzSkin_tool/releases](https://g
 
 ## Compilation method
 
-The exe file released in the release is packaged using the nuitka library, see the nuitka_command.txt file in the project root directory for the specific packaging command
+The exe file released in the release is packaged using the nuitka([https://github.com/Nuitka/Nuitka](https://github.com/Nuitka/Nuitka)) library, see the nuitka_command.txt file in the project root directory for the specific packaging command
 
 # Features
 
