@@ -4,6 +4,14 @@ R3nzSkin tool
 
 R3nzSkin小工具
 
+---
+
+中文文档: [https://github.com/Weltolk/R3nzSkin_tool/blob/main/README.md](https://github.com/Weltolk/R3nzSkin_tool/blob/main/README.md)
+
+English Documents: [https://github.com/Weltolk/R3nzSkin_tool/blob/main/README_en.md](https://github.com/Weltolk/R3nzSkin_tool/blob/main/README_en.md)
+
+---
+
 # 安装或编译方法
 
 ## 安装方法
@@ -12,7 +20,7 @@ R3nzSkin小工具
 
 ## 编译方法
 
-release中发布的exe文件是使用nuitka库打包的,具体打包命令请参见项目根目录下的nuitka_command.txt文件
+release中发布的exe文件是使用nuitka库([https://github.com/Nuitka/Nuitka](https://github.com/Nuitka/Nuitka))打包的,具体打包命令请参见项目根目录下的nuitka_command.txt文件
 
 # 功能
 
