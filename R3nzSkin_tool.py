@@ -250,7 +250,7 @@ if __name__ == "__main__":
         write_config()
 
     root = Tk()
-    root.title("R3nzSkin - LOL file replace")
+    root.title("R3nzSkin tool")
     root.geometry("850x650")
     # root.iconphoto(True, PhotoImage(file="./icon.png"))
 
