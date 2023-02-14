@@ -8,8 +8,6 @@ R3nzSkin小工具
 
 中文文档: [https://github.com/Weltolk/R3nzSkin_tool/blob/main/README.md](https://github.com/Weltolk/R3nzSkin_tool/blob/main/README.md)
 
-English Documents: [https://github.com/Weltolk/R3nzSkin_tool/blob/main/README_en.md](https://github.com/Weltolk/R3nzSkin_tool/blob/main/README_en.md)
-
 ---
 
 # Installation or compilation method
