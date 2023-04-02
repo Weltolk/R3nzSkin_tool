@@ -9,6 +9,10 @@ import subprocess
 
 text0_0_wait_text = "等待LOL客户端启动..."
 
+mode_button_dark_text = "切换界面\n暗黑模式"
+
+mode_button_white_text = "切换界面\n白昼模式"
+
 config_file = "r3_replace_config.json"
 
 default_game_file_path = "Game\\\\LogitechLed.dll"
@@ -18,13 +22,28 @@ process_name = "LeagueClient.exe"
 
 path_status = False
 
+# 注意: 可迭代对象的遍历
 default_config = {
     "game_file_path": default_game_file_path,
     "r3_file_path": default_r3_file_path,
     "exclude_exe_list": [
         "R3nzSkin_tool.exe",
     ],
+    "is_dark_mode": 1,
 }
+
+
+def config_checker() -> None:
+    global config
+    status = False
+    for key in default_config:
+        if key not in config:
+            config[key] = default_config[key]
+            status = True
+
+    if status:
+        write_config()
+        read_config()
 
 
 def find_procs_by_name(name: str) -> list[psutil.Process]:
@@ -240,11 +259,86 @@ def task() -> None:
     root.after(3000, task)
 
 
+def enable_dark_mode() -> None:
+    dark_root_bg = "#1F1F1F"
+    dark_lb_bg = "#1F1F1F"
+    dark_text_bg = "#1F1F1F"
+    dark_btn_bg = "#333333"
+    dark_fg = "#FFFFFF"
+    root.config(bg=dark_root_bg)
+    mode_button.config(bg=dark_btn_bg, fg=dark_fg)
+    lb0_0.config(bg=dark_lb_bg, fg=dark_fg)
+    text0_0.config(bg=dark_text_bg, fg=dark_fg)
+    btn0_0.config(bg=dark_btn_bg, fg=dark_fg)
+    btn0_1.config(bg=dark_btn_bg, fg=dark_fg)
+    lb1_0.config(bg=dark_lb_bg, fg=dark_fg)
+    text1_0.config(bg=dark_text_bg, fg=dark_fg)
+    lb2_0.config(bg=dark_lb_bg, fg=dark_fg)
+    text2_0.config(bg=dark_text_bg, fg=dark_fg)
+    btn2_0.config(bg=dark_btn_bg, fg=dark_fg)
+    btn2_1.config(bg=dark_btn_bg, fg=dark_fg)
+    lb2_1.config(bg=dark_lb_bg, fg=dark_fg)
+    text2_1.config(bg=dark_text_bg, fg=dark_fg)
+    lb2_2.config(bg=dark_lb_bg, fg=dark_fg)
+    text2_2.config(bg=dark_text_bg, fg=dark_fg)
+    lb2_3.config(bg=dark_lb_bg, fg=dark_fg)
+
+    mode_button.config(text=mode_button_white_text)
+
+
+def disable_dark_mode() -> None:
+    white_root_bg = "#FFFFFF"
+    white_lb_bg = "#FFFFFF"
+    white_text_bg = "#FFFFFF"
+    white_btn_bg = "#F0F0F0"
+    white_fg = "#000000"
+    root.config(bg=white_root_bg)
+    mode_button.config(bg=white_btn_bg, fg=white_fg)
+    lb0_0.config(bg=white_lb_bg, fg=white_fg)
+    text0_0.config(bg=white_text_bg, fg=white_fg)
+    btn0_0.config(bg=white_btn_bg, fg=white_fg)
+    btn0_1.config(bg=white_btn_bg, fg=white_fg)
+    lb1_0.config(bg=white_lb_bg, fg=white_fg)
+    text1_0.config(bg=white_text_bg, fg=white_fg)
+    lb2_0.config(bg=white_lb_bg, fg=white_fg)
+    text2_0.config(bg=white_text_bg, fg=white_fg)
+    btn2_0.config(bg=white_btn_bg, fg=white_fg)
+    btn2_1.config(bg=white_btn_bg, fg=white_fg)
+    lb2_1.config(bg=white_lb_bg, fg=white_fg)
+    text2_1.config(bg=white_text_bg, fg=white_fg)
+    lb2_2.config(bg=white_lb_bg, fg=white_fg)
+    text2_2.config(bg=white_text_bg, fg=white_fg)
+    lb2_3.config(bg=white_lb_bg, fg=white_fg)
+
+    mode_button.config(text=mode_button_dark_text)
+
+
+def toggle_dark_mode() -> None:
+    global config
+    if config["is_dark_mode"]:
+        disable_dark_mode()
+        config["is_dark_mode"] = 0
+        write_config()
+    else:
+        enable_dark_mode()
+        config["is_dark_mode"] = 1
+        write_config()
+
+
+def set_theme() -> None:
+    global config
+    if config["is_dark_mode"]:
+        enable_dark_mode()
+    else:
+        disable_dark_mode()
+
+
 if __name__ == "__main__":
     lol_path = ""
     config = dict()
     if os.path.isfile(config_file):
         read_config()
+        config_checker()
     else:
         config = default_config
         write_config()
@@ -255,6 +349,10 @@ if __name__ == "__main__":
     # root.iconphoto(True, PhotoImage(file="./icon.png"))
 
     root.after(3000, task)
+
+    # 暗黑模式部分
+    mode_button = Button(root, text=mode_button_dark_text, command=toggle_dark_mode)
+    mode_button.place(relwidth=0.075, relheight=0.095, relx=0.9125, rely=0.025)
 
     # LOL路径部分
     lb0_0 = Label(root, text="LOL路径(自动获取) 启动LOL客户端后会自动获取到", anchor=NW)
@@ -320,5 +418,7 @@ if __name__ == "__main__":
     4.当已经替换了一个文件时,修改要替换的文件,软件会自动恢复上一个文件,无需手动恢复
     """.strip(), relief=GROOVE, bg="#FFFFFF")
     lb2_3.place(relwidth=0.8, relheight=0.31, relx=0.1, rely=0.665)
+
+    set_theme()  # 初始化主题
 
     root.mainloop()
