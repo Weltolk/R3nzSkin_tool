@@ -32,4 +32,6 @@ release中发布的exe文件是使用nuitka库([https://github.com/Nuitka/Nuitka
 
 # 软件截图
 
-![image](https://user-images.githubusercontent.com/40228052/206143484-a515db70-c8fa-4382-aa43-b48ead86b7c5.png)
+![image](https://user-images.githubusercontent.com/40228052/229360598-bad66a7b-0942-4303-b62f-9091ee8cb47b.png)
+
+![image](https://user-images.githubusercontent.com/40228052/229360606-d6ca7375-f45b-4cb1-8066-15d8747447a3.png)
