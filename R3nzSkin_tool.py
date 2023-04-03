@@ -265,22 +265,23 @@ def enable_dark_mode() -> None:
     dark_text_bg = "#1F1F1F"
     dark_btn_bg = "#333333"
     dark_fg = "#FFFFFF"
+    dark_insert_background = "#FFFFFF"
     root.config(bg=dark_root_bg)
     mode_button.config(bg=dark_btn_bg, fg=dark_fg)
     lb0_0.config(bg=dark_lb_bg, fg=dark_fg)
-    text0_0.config(bg=dark_text_bg, fg=dark_fg)
+    text0_0.config(bg=dark_text_bg, fg=dark_fg, insertbackground=dark_insert_background)
     btn0_0.config(bg=dark_btn_bg, fg=dark_fg)
     btn0_1.config(bg=dark_btn_bg, fg=dark_fg)
     lb1_0.config(bg=dark_lb_bg, fg=dark_fg)
-    text1_0.config(bg=dark_text_bg, fg=dark_fg)
+    text1_0.config(bg=dark_text_bg, fg=dark_fg, insertbackground=dark_insert_background)
     lb2_0.config(bg=dark_lb_bg, fg=dark_fg)
-    text2_0.config(bg=dark_text_bg, fg=dark_fg)
+    text2_0.config(bg=dark_text_bg, fg=dark_fg, insertbackground=dark_insert_background)
     btn2_0.config(bg=dark_btn_bg, fg=dark_fg)
     btn2_1.config(bg=dark_btn_bg, fg=dark_fg)
     lb2_1.config(bg=dark_lb_bg, fg=dark_fg)
-    text2_1.config(bg=dark_text_bg, fg=dark_fg)
+    text2_1.config(bg=dark_text_bg, fg=dark_fg, insertbackground=dark_insert_background)
     lb2_2.config(bg=dark_lb_bg, fg=dark_fg)
-    text2_2.config(bg=dark_text_bg, fg=dark_fg)
+    text2_2.config(bg=dark_text_bg, fg=dark_fg, insertbackground=dark_insert_background)
     lb2_3.config(bg=dark_lb_bg, fg=dark_fg)
 
     mode_button.config(text=mode_button_white_text)
@@ -292,22 +293,23 @@ def disable_dark_mode() -> None:
     white_text_bg = "#FFFFFF"
     white_btn_bg = "#F0F0F0"
     white_fg = "#000000"
+    white_insert_background = "#000000"
     root.config(bg=white_root_bg)
     mode_button.config(bg=white_btn_bg, fg=white_fg)
     lb0_0.config(bg=white_lb_bg, fg=white_fg)
-    text0_0.config(bg=white_text_bg, fg=white_fg)
+    text0_0.config(bg=white_text_bg, fg=white_fg, insertbackground=white_insert_background)
     btn0_0.config(bg=white_btn_bg, fg=white_fg)
     btn0_1.config(bg=white_btn_bg, fg=white_fg)
     lb1_0.config(bg=white_lb_bg, fg=white_fg)
-    text1_0.config(bg=white_text_bg, fg=white_fg)
+    text1_0.config(bg=white_text_bg, fg=white_fg, insertbackground=white_insert_background)
     lb2_0.config(bg=white_lb_bg, fg=white_fg)
-    text2_0.config(bg=white_text_bg, fg=white_fg)
+    text2_0.config(bg=white_text_bg, fg=white_fg, insertbackground=white_insert_background)
     btn2_0.config(bg=white_btn_bg, fg=white_fg)
     btn2_1.config(bg=white_btn_bg, fg=white_fg)
     lb2_1.config(bg=white_lb_bg, fg=white_fg)
-    text2_1.config(bg=white_text_bg, fg=white_fg)
+    text2_1.config(bg=white_text_bg, fg=white_fg, insertbackground=white_insert_background)
     lb2_2.config(bg=white_lb_bg, fg=white_fg)
-    text2_2.config(bg=white_text_bg, fg=white_fg)
+    text2_2.config(bg=white_text_bg, fg=white_fg, insertbackground=white_insert_background)
     lb2_3.config(bg=white_lb_bg, fg=white_fg)
 
     mode_button.config(text=mode_button_dark_text)
