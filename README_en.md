@@ -10,15 +10,19 @@ R3nzSkin小工具
 
 ---
 
-# Installation or compilation method
+# Install, compile and update
 
-## Installation method
+## Installation
 
 Just download from [https://github.com/Weltolk/R3nzSkin_tool/releases](https://github.com/Weltolk/R3nzSkin_tool/releases) and open it to use
 
-## Compilation method
+## Compilation
 
 The exe file released in the release is packaged using the nuitka([https://github.com/Nuitka/Nuitka](https://github.com/Nuitka/Nuitka)) library, see the nuitka_command.txt file in the project root directory for the specific packaging command
+
+## Update
+
+Just overwrite the exe file, the program will automatically handle the configuration file updates
 
 # Features
 
