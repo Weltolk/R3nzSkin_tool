@@ -16,7 +16,7 @@ English Documents: [https://github.com/Weltolk/R3nzSkin_tool/blob/main/README_en
 
 从[https://github.com/Weltolk/R3nzSkin_tool/releases](https://github.com/Weltolk/R3nzSkin_tool/releases)下载后打开使用即可
 
-## Update
+## 编译
 
 release中发布的exe文件是使用nuitka库([https://github.com/Nuitka/Nuitka](https://github.com/Nuitka/Nuitka))打包的,具体打包命令请参见项目根目录下的nuitka_command.txt文件 [https://github.com/Weltolk/R3nzSkin_tool/blob/main/nuitka_command.txt](https://github.com/Weltolk/R3nzSkin_tool/blob/main/nuitka_command.txt)
 
