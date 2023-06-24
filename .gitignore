@@ -1,2 +1,5 @@
 /r3_replace_config.json
 /R3nzSkin_tool.exe
+/R3nzSkin_tool.build/
+/R3nzSkin_tool.dist/
+/R3nzSkin_tool.onefile-build/

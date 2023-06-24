@@ -6,6 +6,7 @@ import json
 import shutil
 import time
 import subprocess
+from packaging import version
 
 text0_0_wait_text = "等待LOL客户端启动..."
 
@@ -15,7 +16,7 @@ mode_button_white_text = "切换界面\n白昼模式"
 
 config_file = "r3_replace_config.json"
 
-default_game_file_path = "Game\\\\LogitechLed.dll"
+default_game_file_path = "Game\\\\hid.dll"
 default_r3_file_path = "R3nzSkin.dll"
 
 process_name = "LeagueClient.exe"
@@ -29,8 +30,24 @@ default_config = {
     "exclude_exe_list": [
         "R3nzSkin_tool.exe",
     ],
+    "is_not_game_file_path": 1,
     "is_dark_mode": 1,
+    "version": "v1.2",
 }
+
+
+def version_checker() -> None:
+    global config
+    status = False
+    if "version" not in config or version.parse(config["version"]) < version.parse(default_config["version"]):
+        config["version"] = default_config["version"]
+        if config["game_file_path"] == "Game\\\\LogitechLed.dll":
+            config["game_file_path"] = default_game_file_path
+            status = True
+
+    if status:
+        write_config()
+        read_config()
 
 
 def config_checker() -> None:
@@ -100,16 +117,21 @@ def r3_replace_game() -> None:
         return
 
     if not os.path.isfile(file_path):
-        tkinter.messagebox.showerror(title='Error', message="{}文件不存在".format(file_path))
-        return
+        config["is_not_game_file_path"] = 1
+        write_config()
 
-    if os.path.isfile(bak_file_path_local):
-        tkinter.messagebox.showerror(title='Error', message="{}备份文件已存在".format(bak_file_path_local))
-        return
+        # tkinter.messagebox.showerror(title='Error', message="{}文件不存在".format(file_path))
+        # return
+    else:
+        config["is_not_game_file_path"] = 0
+        write_config()
+        if os.path.isfile(bak_file_path_local):
+            tkinter.messagebox.showerror(title='Error', message="{}备份文件已存在".format(bak_file_path_local))
+            return
 
-    if os.path.isfile(bak_file_path_game):
-        tkinter.messagebox.showerror(title='Error', message="{}备份文件已存在".format(bak_file_path_game))
-        return
+        if os.path.isfile(bak_file_path_game):
+            tkinter.messagebox.showerror(title='Error', message="{}备份文件已存在".format(bak_file_path_game))
+            return
 
     if text1_0.get("1.0", "end").strip() != config["game_file_path"] \
             or text2_0.get("1.0", "end").strip() != config["r3_file_path"]:
@@ -118,14 +140,21 @@ def r3_replace_game() -> None:
         config["r3_file_path"] = text2_0.get("1.0", "end").strip()
         write_config()
 
-    shutil.copyfile(file_path, bak_file_path_local)
-    shutil.copyfile(file_path, bak_file_path_game)
-    os.remove(file_path)
+    if not config["is_not_game_file_path"]:
+        shutil.copyfile(file_path, bak_file_path_local)
+        shutil.copyfile(file_path, bak_file_path_game)
+        os.remove(file_path)
+
     shutil.copyfile(config["r3_file_path"], file_path)
 
     text2_1.delete("1.0", "end")
-    text2_1.insert("1.0", "{}替换{}成功\n备份为{},{}".format(config["r3_file_path"], file_path, bak_file_path_local,
-                                                             bak_file_path_game))
+
+    if not config["is_not_game_file_path"]:
+        output = "{}替换{}成功\n备份为{},{}".format(config["r3_file_path"], file_path, bak_file_path_local,
+                                                    bak_file_path_game)
+    else:
+        output = "{}替换{}成功".format(config["r3_file_path"], file_path)
+    text2_1.insert("1.0", output)
 
 
 def game_replace_r3() -> None:
@@ -151,13 +180,14 @@ def game_replace_r3() -> None:
     #     tkinter.messagebox.showerror(title='Error', message="{}文件不存在".format(file_path))
     #     return
 
-    if not os.path.isfile(bak_file_path_local):
-        tkinter.messagebox.showerror(title='Error', message="{}备份文件不存在".format(bak_file_path_local))
-        return
+    if not config["is_not_game_file_path"]:
+        if not os.path.isfile(bak_file_path_local):
+            tkinter.messagebox.showerror(title='Error', message="{}备份文件不存在".format(bak_file_path_local))
+            return
 
-    if not os.path.isfile(bak_file_path_game):
-        tkinter.messagebox.showerror(title='Error', message="{}备份文件不存在".format(bak_file_path_game))
-        return
+        if not os.path.isfile(bak_file_path_game):
+            tkinter.messagebox.showerror(title='Error', message="{}备份文件不存在".format(bak_file_path_game))
+            return
 
     if text1_0.get("1.0", "end").strip() != config["game_file_path"] \
             or text2_0.get("1.0", "end").strip() != config["r3_file_path"]:
@@ -167,24 +197,31 @@ def game_replace_r3() -> None:
         write_config()
 
     os.remove(file_path)
-    shutil.copyfile(bak_file_path_local, file_path)
-    # shutil.copyfile(bak_file_path_game, file_path)
-    os.remove(bak_file_path_local)
-    os.remove(bak_file_path_game)
+    if not config["is_not_game_file_path"]:
+        shutil.copyfile(bak_file_path_local, file_path)
+        # shutil.copyfile(bak_file_path_game, file_path)
+        os.remove(bak_file_path_local)
+        os.remove(bak_file_path_game)
 
     text2_1.delete("1.0", "end")
-    text2_1.insert("1.0", "{}替换{}成功\n删除备份{},{}".format(bak_file_path_local, file_path, bak_file_path_local,
-                                                               bak_file_path_game))
+
+    if not config["is_not_game_file_path"]:
+        output = "{}替换{}成功\n删除备份{},{}".format(bak_file_path_local, file_path, bak_file_path_local,
+                                                               bak_file_path_game)
+    else:
+        output = "{}替换{}成功".format(bak_file_path_local, file_path)
+    text2_1.insert("1.0", output)
 
 
 def recovery_file(file_path: str, bak_file_path_local: str, bak_file_path_game: str) -> None:
     global path_status, lol_path, config
 
     os.remove(file_path)
-    shutil.copyfile(bak_file_path_local, file_path)
-    # shutil.copyfile(bak_file_path_game, file_path)
-    os.remove(bak_file_path_local)
-    os.remove(bak_file_path_game)
+    if not config["is_not_game_file_path"]:
+        shutil.copyfile(bak_file_path_local, file_path)
+        # shutil.copyfile(bak_file_path_game, file_path)
+        os.remove(bak_file_path_local)
+        os.remove(bak_file_path_game)
 
 
 def restore() -> None:
@@ -207,6 +244,8 @@ def restore() -> None:
 
         if os.path.isfile(bak_file_path_local) and os.path.isfile(bak_file_path_game):
             recovery_file(file_path, bak_file_path_local, bak_file_path_game)
+        elif os.path.isfile(file_path):
+            os.remove(file_path)
 
         config["game_file_path"] = default_game_file_path
         config["r3_file_path"] = default_r3_file_path
@@ -340,6 +379,7 @@ if __name__ == "__main__":
     config = dict()
     if os.path.isfile(config_file):
         read_config()
+        version_checker()
         config_checker()
     else:
         config = default_config
@@ -411,7 +451,7 @@ if __name__ == "__main__":
     text2_2.insert("1.0", "\n".join(config["exclude_exe_list"]) + "\n")
 
     # 提示框部分
-    lb2_3 = Label(root, text="""'
+    lb2_3 = Label(root, text="""
     帮助信息:
     
     1.将本软件放在R3nzSkin文件夹下,也就是R3nzSkin.dll同目录下
