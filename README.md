@@ -10,6 +10,8 @@ English Documents: [https://github.com/Weltolk/R3nzSkin_tool/blob/main/README_en
 
 ---
 
+[https://github.com/R3nzTheCodeGOD/R3nzSkin?tab=readme-ov-file#announcement](https://github.com/R3nzTheCodeGOD/R3nzSkin?tab=readme-ov-file#announcement)
+
 # 安装,编译和更新
 
 ## 安装

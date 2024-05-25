@@ -10,6 +10,8 @@ R3nzSkin小工具
 
 ---
 
+[https://github.com/R3nzTheCodeGOD/R3nzSkin?tab=readme-ov-file#announcement](https://github.com/R3nzTheCodeGOD/R3nzSkin?tab=readme-ov-file#announcement)
+
 # Install, compile and update
 
 ## Installation
